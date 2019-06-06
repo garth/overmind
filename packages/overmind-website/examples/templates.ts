@@ -2,7 +2,7 @@ const getVersion = () => (location.host.split('.')[0] === 'next' ? '@next' : '')
 
 const views = {
   react: (config) => `
-import { createOvermind, IConfig } from 'overmind'
+import { IConfig } from 'overmind'
 import { createHook } from 'overmind-react'
 ${config.trim()}
 
@@ -11,9 +11,7 @@ declare module 'overmind' {
   interface Config extends IConfig<typeof config> {}
 }
 
-export const overmind = createOvermind(config)
-
-export const useOvermind = createHook(overmind)
+export const useOvermind = createHook<typeof config>()
 `,
   angular: (config) => `
 import { IConfig } from 'overmind'
@@ -32,6 +30,18 @@ export class Store extends OvermindService<typeof config> {}
   vue: (config) => ``,
 }
 
+const simple = (config) => `
+import { IConfig } from 'overmind'
+${config.trim()}
+
+// For explicit typing check the Typescript guide
+declare module 'overmind' {
+  interface Config extends IConfig<typeof config> {}
+}
+`
+
 export const tsAppIndex = (view, config) => views[view](config)
+
+export const tsSimpleAppIndex = (config) => simple(config)
 
 export const getPackageWithVersion = (name) => name + getVersion()

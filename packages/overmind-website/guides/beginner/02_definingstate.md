@@ -1,12 +1,10 @@
 # Defining state
 
-Even though we think of the user interface as the application, it is not. The user interface is just an interface for users to interact with the actual application. So what is the actual application? The actual application is a data structure with values. This data structure with values is the **state** of the application.
+Even though we think of the user interface as the application, it is not. The user interface is just an interface for users to interact with the actual application. So what is the actual application? The actual application is a data structure with values. This data structure with values is the **state** of the application. You might split this up into different components, different store classes or a single state tree. No matter, this is what you need to consume to produce a UI.
 
-On one end we listen to interactions from the user to change this data structure. On the other end we transform this data structure into a user interface. This is what we mean when we say that "the state drives the user interface".
+The application operates by listening to interactions from the user to change this data structure. The data structure is passed to some view library which transforms this data structure into a user interface. Whenever the state changes, a new transformation is made. This is what we mean when we say that "the state drives the user interface".
 
-```marksy
-<Image src="state-ui.png" })
-```
+![state-ui](/images/state-ui.png)
 
 ## The values
 
@@ -38,7 +36,7 @@ Now we are referencing the current tab with a string. In this scenario you would
 
 ### Numbers
 
-Numbers of course represents things like counts, age, etc. But just like strings, they can also represent a reference to something in a list. Like we saw in our **objects** example, to define what the current tab of our application is, we can use a number. You could say that referencing things by number works very well when the value behind the number does not change. Our tabs will most likely not change that is why an array and referencing the current tab by number is perfectly fine.
+Numbers of course represents things like counts, age, etc. But just like strings, they can also represent a reference to something in a list. Like we saw in our **objects** example, to define what the current tab of our application is, we can use a number. You could say that referencing things by number works very well when the value behind the number does not change. Our tabs will most likely not change and that is why an array and referencing the current tab by number, is perfectly fine.
 
 ### Booleans
 
